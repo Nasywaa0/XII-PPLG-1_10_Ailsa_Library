@@ -1,9 +1,9 @@
-const Book = require('../models/LoansModel');
+const Loans = require('../models/LoansModel');
 
 module.exports = {
   index: async (req, res) => {
     try {
-      const loans = await loans.getAll();
+      const loans = await Loans.getAll();
       res.status(200).json({
         status: true,
         data: loans,
@@ -17,14 +17,14 @@ module.exports = {
 
   show: async (req, res) => {
     try {
-      const loans = await loans.getById(req.params.id);
+      const loans = await Loans.getById(req.params.id);
       if (!loans) {
-        return res.status(404).json({ status: false, message: "loand not found" });
+        return res.status(404).json({ status: false, message: "loans tidak ditemukan" });
       }
       res.json({
         status: true,
         data: loans,
-        message: "Data retrieved successfully",
+        message: "Berhasil",
         method: req.method,
         url: req.url,
       });
@@ -36,11 +36,11 @@ module.exports = {
   store: async (req, res) => {
     try {
       console.log("Received data:", req.body);
-      const loansId = await Loan.add(req.body);
+      const loansid = await Loans.add(req.body);
       res.status(200).json({
         status: true,
-        data: { id: loansId, ...req.body },
-        message: "Data added successfully",
+        data: { id: loansid, ...req.body },
+        message: "Sukses",
         method: req.method,
         url: req.url,
       });
@@ -52,7 +52,7 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      const updated = await Loan.update(req.params.id, req.body);
+      const updated = await Loans.update(req.params.id, req.body);
       if (!updated) {
         return res.status(404).json({ status: false, message: "Loans not found" });
       }
@@ -70,9 +70,9 @@ module.exports = {
 
   delete: async (req, res) => {
     try {
-      const deleted = await Loan.delete(req.params.id);
+      const deleted = await Loans.delete(req.params.id);
       if (!deleted) {
-        return res.status(404).json({ status: false, message: "Loans not found" });
+        return res.status(404).json({ status: false, message: "Loans tidak ditemukan" });
       }
       res.json({
         status: true,
