@@ -5,6 +5,7 @@ const userRouter = require('./router/users')
 const booksRoutes = require('./router/books')
 const categoryRoutes = require('./router/category')
 const loansRoutes = require('./router/loans')
+const reviewsRoutes = require('./router/reviews')
 
 
 //agar applikasi bisa membaca inputan dari form
@@ -16,6 +17,7 @@ app.use('/users', userRouter);
 app.use('/books', booksRoutes);
 app.use('/category', categoryRoutes);
 app.use('/loans', loansRoutes);
+app.use('/reviews', reviewsRoutes);
 
 
 app.listen(port, () => {
