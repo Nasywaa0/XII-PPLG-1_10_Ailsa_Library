@@ -1,12 +1,12 @@
-const Book = require('../models/booksModel');
+const Category = require('../models/CategoryModel');
 
 module.exports = {
   index: async (req, res) => {
     try {
-      const books = await Book.getAll();
+      const category = await Category.getAll();
       res.status(200).json({
         status: true,
-        data: books,
+        data: category,
         method: req.method,
         url: req.url,
       });
@@ -17,14 +17,14 @@ module.exports = {
 
   show: async (req, res) => {
     try {
-      const book = await Book.getById(req.params.id);
-      if (!book) {
-        return res.status(404).json({ status: false, message: "Book not found" });
+      const category = await Category.getById(req.params.id);
+      if (!category) {
+        return res.status(404).json({ status: false, message: "Categori tidak ditemukan" });
       }
       res.json({
         status: true,
-        data: book,
-        message: "Data retrieved successfully",
+        data: category,
+        message: "Berhasil",
         method: req.method,
         url: req.url,
       });
@@ -36,11 +36,11 @@ module.exports = {
   store: async (req, res) => {
     try {
       console.log("Received data:", req.body);
-      const bookId = await Book.add(req.body);
+      const categoryid = await Category.add(req.body);
       res.status(200).json({
         status: true,
-        data: { id: bookId, ...req.body },
-        message: "Data added successfully",
+        data: { id: categoryid, ...req.body },
+        message: "Sukses",
         method: req.method,
         url: req.url,
       });
@@ -52,9 +52,9 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      const updated = await Book.update(req.params.id, req.body);
+      const updated = await Category.update(req.params.id, req.body);
       if (!updated) {
-        return res.status(404).json({ status: false, message: "Book not found" });
+        return res.status(404).json({ status: false, message: "Category not found" });
       }
       res.json({
         status: true,
@@ -70,9 +70,9 @@ module.exports = {
 
   delete: async (req, res) => {
     try {
-      const deleted = await Book.delete(req.params.id);
+      const deleted = await Category.delete(req.params.id);
       if (!deleted) {
-        return res.status(404).json({ status: false, message: "Book not found" });
+        return res.status(404).json({ status: false, message: "Category tidak ditemukan" });
       }
       res.json({
         status: true,
